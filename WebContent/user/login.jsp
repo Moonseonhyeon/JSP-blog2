@@ -4,7 +4,7 @@
 
 <div class="container">
 
-	<form action="/blog2/user?cmd=joinProc" method="POST"
+	<form action="/blog2/user?cmd=loginProc" method="POST"
 		class="was-validated">
 		<div class="form-group">
 			<label for="uname">Username:</label> <input type="text"
@@ -22,23 +22,16 @@
 			<div class="invalid-feedback">Please fill out this field.</div>
 		</div>
 
-		<div class="form-group">
-			<label for="uname">Email:</label> <input type="email"
-				class="form-control" id="email" placeholder="Enter username"
-				name="email" required>
-			<div class="valid-feedback">Valid.</div>
-			<div class="invalid-feedback">Please fill out this field.</div>
+		<div class="form-group form-check">
+			<label class="form-check-label"> <input
+				class="form-check-input" type="checkbox" name="remember" required>
+				아이디 기억하기
+				<div class="valid-feedback">Valid.</div>
+				<div class="invalid-feedback">Check this checkbox to continue.</div>
+			</label>
 		</div>
 
-		<div class="form-group">
-			<label for="pwd">Address:</label> <input type="text"
-				class="form-control" id="address" placeholder="Enter password"
-				name="address" required>
-			<div class="valid-feedback">Valid.</div>
-			<div class="invalid-feedback">Please fill out this field.</div>
-		</div>
-
-		<button type="submit" class="btn btn-primary">회원가입 완료</button>
+		<button type="submit" class="btn btn-primary">로그인</button>
 	</form>
 </div>
 <%@ include file="../include/footer.jsp"%>

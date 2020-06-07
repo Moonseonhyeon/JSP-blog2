@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import action.UsersJoinAction;
-import action.UsersJoinProcAction;
+import action.user.UsersJoinAction;
+import action.user.UsersJoinProcAction;
+import action.user.UsersLoginAction;
 
 //http://localhost:8000/blog/user
 @WebServlet("/user")
@@ -56,6 +57,7 @@ public class UsersController extends HttpServlet {
 			// 회원삭제를 진행한 후 -> 로그아웃을 하고 -> index.jsp로 이동
 		} else if (cmd.equals("login")) {
 			// 회원 로그인 페이지로 이동
+			return new UsersLoginAction();
 		} else if (cmd.equals("loginProc")) {
 			// 회원 로그인을 수행 한 후-> 세션 등록을 하고 -> index.jsp로 이동
 		}
