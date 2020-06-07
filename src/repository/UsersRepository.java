@@ -27,7 +27,9 @@ public class UsersRepository {
 	private ResultSet rs = null;
 
 	public int save(Users user) {
-		final String SQL = "INSERT INTO users(id, username, password, email, address, userRole, createDate) VALUE(USERS_SEQ.nextval, ?,?,?,?,?,sysdate";
+		final String SQL =
+				"INSERT INTO users(id, username, password, email, address, userRole, createDate)"
+				+ " VALUES(USERS_SEQ.nextval,?,?,?,?,?,sysdate)";
 
 		try {
 			conn = DBConn.getConnection();

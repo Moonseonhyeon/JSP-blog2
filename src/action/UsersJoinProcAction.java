@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lombok.Builder;
+import model.RoleType;
 import model.Users;
 import repository.UsersRepository;
 import util.Script;
@@ -35,9 +36,7 @@ public class UsersJoinProcAction implements Action {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String address = request.getParameter("address");
-		String userprofile = request.getParameter("userprofile");
-		String userRole = request.getParameter("userRole");
-		String createdate = request.getParameter("createdate");
+		String userRole = RoleType.USER.toString();
 
 		// user 오브젝트 변환
 		Users user = Users.builder()
