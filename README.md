@@ -1,6 +1,6 @@
 ###Jsp 모델2 블로그 프로젝트
 
-##오라클 12c 사용자 생성
+## 오라클 12c 사용자 생성
 ```sql
 alter session set "_ORACLE_SCRIPT"=true;  
 CREATE USER love IDENTIFIED BY bitc5600;

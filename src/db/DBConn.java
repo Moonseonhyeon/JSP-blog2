@@ -1,6 +1,8 @@
 package db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -25,4 +27,26 @@ public class DBConn {
 		return null;
 
 	}
+
+	public static void close(Connection conn, PreparedStatement pstmt) {
+		try {
+			conn.close();
+			pstmt.close();
+		} catch (Exception e) {
+			System.out.println("DB종료시 오류가 발생하였습니다."+ e.getMessage());
+		}
+
+	}
+	
+	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
+		try {
+			conn.close();
+			pstmt.close();
+			rs.close();
+		} catch (Exception e) {
+			System.out.println("DB종료시 오류가 발생하였습니다."+ e.getMessage());
+		}
+
+	}
+	
 }
