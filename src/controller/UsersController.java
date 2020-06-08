@@ -11,6 +11,7 @@ import action.Action;
 import action.user.UsersJoinAction;
 import action.user.UsersJoinProcAction;
 import action.user.UsersLoginAction;
+import action.user.UsersLoginProcAction;
 
 //http://localhost:8000/blog/user
 @WebServlet("/user")
@@ -60,6 +61,7 @@ public class UsersController extends HttpServlet {
 			return new UsersLoginAction();
 		} else if (cmd.equals("loginProc")) {
 			// 회원 로그인을 수행 한 후-> 세션 등록을 하고 -> index.jsp로 이동
+			return new UsersLoginProcAction();
 		}
 		return null;
 	}
