@@ -5,11 +5,13 @@
 <div class="container">
 
 	<form action="/blog2/user?cmd=joinProc" method="POST"
-		class="was-validated">
+		class="was-validated" onsubmit="return validate()">
 		<div class="form-group">
-			<label for="username">Username:</label> <input type="text"
-				class="form-control" id="username" placeholder="Enter username"
-				name="username" required>
+			<label for="username">Username:</label>
+			<button type="button" class="btn btn-warning float-right"
+				onclick="usernameCheck()">중복확인</button>
+			<input type="text" class="form-control" id="username"
+				placeholder="Enter username" name="username" required>
 			<div class="valid-feedback">Valid.</div>
 			<div class="invalid-feedback">Please fill out this field.</div>
 		</div>
@@ -31,10 +33,11 @@
 		</div>
 
 		<div class="form-group">
-			<label for="address">Address:</label> 
-			<input type="button" class="btn btn-warning float-right" onClick="goPopup();" value="주소 등록하기" />
-			<input type="text"	class="form-control" id="address" placeholder="Enter password"
-				name="address" required>
+			<label for="address">Address:</label> <input type="button"
+				class="btn btn-warning float-right" onClick="goPopup();"
+				value="주소 등록하기" /> <input type="text" class="form-control"
+				id="address" placeholder="Enter password" name="address" required
+				readonly>
 			<div class="valid-feedback">Valid.</div>
 			<div class="invalid-feedback">Please fill out this field.</div>
 		</div>
@@ -43,21 +46,35 @@
 	</form>
 </div>
 <script>
-function goPopup(){
-	// 주소검색을 수행할 팝업 페이지를 호출합니다.
-	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-	var pop = window.open("/blog2/juso/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-	
-	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
-}
+	var isCheckedUsername = false;
+	function validate() {
+		if (!isCheckedUsername) {
+			alert('username 중복체크를 해주세요');
+		}
+		return isCheckedUsername;
+	}
+	function usernameCheck() {
+		// 성공 (ajax)
+		var tfUsername = $('#username').val();
+		//alert(tfUsername);
+		console.log(tfUsername);
+		$.ajax({
+			type : 'get',
+			url : '/blog2/user?cmd=usernameCheck&username=' + tfUsername
+		}).done(function(result) {
+			console.log(result);
+			if (result == 1) {
+				alert('아이디가 중복되었습니다');
+			} else if (result == 0) {
+				alert('사용하실 수 있는 아이디입니다.');
+				isCheckedUsername = true;
+			} else {
+				console.log('develop : 서버 오류');
+			}
+		}).fail(function(error) {
+			console.log(error);
+		});
 
-
-function jusoCallBack(roadFullAddr){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		//document.form.roadFullAddr.value = roadFullAddr; 구방식
-		var tfAddress = document.querySelector("#address");
-		tfAddress.value = roadFullAddr;
-}
+	}
 </script>
 <%@ include file="../include/footer.jsp"%>

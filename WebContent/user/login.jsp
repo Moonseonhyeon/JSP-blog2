@@ -2,13 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/nav.jsp"%>
 
-<%-- <%
-	String remember = (String) request.getAttribute("remember");
 
-	if (remember == null) {
-		remember = "";
-	}
-%> --%>
 
 <div class="container">
 

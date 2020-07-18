@@ -16,7 +16,8 @@ public class UsersRepository {
 	private static final String TAG = "UsersRepository : ";
 	private static UsersRepository instance = new UsersRepository();
 
-	private UsersRepository() {	}
+	private UsersRepository() {
+	}
 
 	public static UsersRepository getInstance() {
 		return instance;
@@ -25,6 +26,31 @@ public class UsersRepository {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+
+	public int findByUsername(String username) {
+		final String SQL = "SELECT count(*) FROM users WHERE username = ?";
+		Users user = null;
+
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			// 물음표 완성하기
+			pstmt.setString(1, username);
+			// if 돌려서 rs -> java오브젝트에 집어넣기
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1); // 0 or 1
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findByUsername : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+
+		return -1;
+	}
 
 	public Users findByUsernameAndPassword(String username, String password) {
 		final String SQL = "SELECT id, username, email, address, userProfile, userRole, createDate FROM users WHERE username = ? AND password = ?";
@@ -38,7 +64,7 @@ public class UsersRepository {
 			pstmt.setString(2, password);
 			// if 돌려서 rs -> java오브젝트에 집어넣기
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				user = new Users();
 				user.setId(rs.getInt("id"));
 				user.setUsername(rs.getString("username"));
@@ -48,7 +74,7 @@ public class UsersRepository {
 				user.setUserRole(rs.getString("userRole"));
 				user.setCreateDate(rs.getTimestamp("createDate"));
 			}
-			
+
 			return user;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,7 +85,7 @@ public class UsersRepository {
 		return null;
 
 	}
-	
+
 	public int save(Users user) {
 		final String SQL = "INSERT INTO users(id, username, password, email, address, userRole, createDate)"
 				+ " VALUES(USERS_SEQ.nextval,?,?,?,?,?,sysdate)";
@@ -167,7 +193,5 @@ public class UsersRepository {
 		return null;
 
 	}
-	
-	
 
 }
