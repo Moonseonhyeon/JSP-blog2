@@ -13,6 +13,7 @@ import action.Action;
 import action.board.BoardDeleteAction;
 import action.board.BoardDetailAction;
 import action.board.BoardHomeAction;
+import action.board.BoardSearchAction;
 import action.board.BoardUpdateAction;
 import action.board.BoardUpdateProcAction;
 import action.board.BoardWriteAction;
@@ -69,6 +70,8 @@ public class BoardController extends HttpServlet {
 			return new BoardUpdateProcAction(); //수정하기
 		}else if(cmd.equals("delete")) {
 			return new BoardDeleteAction(); //수정하기
+		}else if(cmd.equals("search")) {
+			return new BoardSearchAction(); //검색하기
 		}
 		return null;
 	}
