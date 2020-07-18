@@ -13,18 +13,15 @@ import model.Board;
 import repository.BoardRepository;
 import util.HtmlParser;
 
-public class BoardHomeAction implements Action{
+public class BoardHomeAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int page = Integer.parseInt(request.getParameter("page"));
 		// 1. DB연결해서 Board 목록 다 불러와서
-		
-		// 2. request에 담고
-		
-		// 3. 이동 home.jsp
-		BoardRepository boardRepository = 
-				BoardRepository.getInstance();
-		List<Board> boards = boardRepository.findAll();
+		BoardRepository boardRepository = BoardRepository.getInstance();
+		// 2. 3건만 페이징하여 가져오기
+		List<Board> boards = boardRepository.findAll(page);
 
 		// 본문 짧게 가공하기
 		for (Board board : boards) {
@@ -32,10 +29,10 @@ public class BoardHomeAction implements Action{
 			board.setContent(preview);
 		}
 		request.setAttribute("boards", boards);
-		
+
 		RequestDispatcher dis = request.getRequestDispatcher("home.jsp");
 		dis.forward(request, response);
-		
+
 	}
 
 }

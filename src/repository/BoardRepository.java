@@ -24,6 +24,27 @@ public class BoardRepository {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+	
+	public int updateReadCount(int id) {
+		final String SQL 
+		= "UPDATE board SET readCount = readCount + 1 WHERE id = ?";
+
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			// 물음표 완성하기
+
+			pstmt.setInt(1, id);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG+"updateReadCount : "+e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt);
+		}
+
+		return -1;
+	}
 
 	public int save(Board board) {
 		final String SQL = "INSERT INTO board(id, userId, title, content, readCount, createDate) VALUES(board_seq.nextval, ?, ?, ?, ?, sysdate)";
@@ -91,13 +112,20 @@ public class BoardRepository {
 
 	}
 
-	public List<Board> findAll() {
-		final String SQL = "SELECT * FROM board ORDER BY id DESC";
+	public List<Board> findAll(int page) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT /*+ INDEX_DESC(BOARD SYS_C007969)*/id,");
+		sb.append("userId, title, content, readCount, createDate ");
+		sb.append("FROM board ");
+		sb.append("OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY");
+
+		final String SQL = sb.toString();
 		List<Board> boards = new ArrayList<>();
 
 		try {
 			conn = DBConn.getConnection();
 			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, page*3);
 			// while 돌려서 rs -> java오브젝트에 집어넣기
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -114,7 +142,7 @@ public class BoardRepository {
 			return boards;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(TAG + "findAll : " + e.getMessage());
+			System.out.println(TAG+"findAll(page) : "+e.getMessage());
 		} finally {
 			DBConn.close(conn, pstmt, rs);
 		}

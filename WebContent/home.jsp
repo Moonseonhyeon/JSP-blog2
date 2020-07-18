@@ -4,13 +4,21 @@
 
 <div class="container">
 	<c:forEach var="board" items="${boards}">
-	<div class="card m-2" style="width: 100%">
-		<div class="card-body">
-	    <h4 class="card-title">${board.title}</h4>
-	    <p class="card-text">${board.content}</p>
-			<a href="/blog2/board?cmd=detail&id=${board.id}" class="btn btn-primary">상세보기</a>
+		<div class="card m-2" style="width:100%">
+		  <div class="card-body">
+		    <h4 class="card-title">${board.title}</h4>
+		    <p class="card-text">${board.content}</p>
+		    <a href="/blog2/board?cmd=detail&id=${board.id}" class="btn btn-primary">상세보기</a>
+		  </div>
 		</div>
-	</div>
 	</c:forEach>
+
+	<br/>
+
+	<!-- disabled -->
+	<ul class="pagination justify-content-center">
+	  <li class="page-item"><a class="page-link" href="/blog2/board?cmd=home&page=${param.page-1}">Previous</a></li>
+	  <li class="page-item"><a class="page-link" href="/blog2/board?cmd=home&page=${param.page+1}">Next</a></li>
+	</ul>
 </div>
 <%@ include file="include/footer.jsp"%>

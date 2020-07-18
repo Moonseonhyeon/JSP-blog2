@@ -1,8 +1,9 @@
 ###Jsp 모델2 블로그 프로젝트
 
 ## 오라클 12c 사용자 생성
+
 ```sql
-alter session set "_ORACLE_SCRIPT"=true;  
+alter session set "_ORACLE_SCRIPT"=true;
 CREATE USER love IDENTIFIED BY bitc5600;
 GRANT CREATE SESSION TO love;
 GRANT CREATE TABLESPACE TO love;
@@ -10,7 +11,9 @@ GRANT CREATE TABLE TO love;
 GRANT CREATE SEQUENCE TO love;
 alter user love default tablespace users quota unlimited on users;
 ```
+
 ## 테이블
+
 ```sql
 CREATE TABLE users(
 	id number primary key,
@@ -43,16 +46,26 @@ CREATE TABLE reply(
 ```
 
 ## 시퀀스
+
 ```sql
 CREATE SEQUENCE USERS_SEQ
   START WITH 1
   INCREMENT BY 1;
-  
+
 CREATE SEQUENCE BOARD_SEQ
   START WITH 1
   INCREMENT BY 1;
-  
+
 CREATE SEQUENCE REPLY_SEQ
   START WITH 1
   INCREMENT BY 1;
-  ```
+```
+
+## 페이징 쿼리
+
+```sql
+SELECT /*+ INDEX_DESC(BOARD SYS_C007969)*/id,
+userId, title, content, readCount, createDate
+FROM board
+OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY;
+```
