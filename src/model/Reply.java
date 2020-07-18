@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Reply {
  private int id;
- private int userid;
- private int boardid;
+ private int userId;
+ private int boardId;
  private String content;
- private Timestamp createdate;
+ private Timestamp createDate;
 }

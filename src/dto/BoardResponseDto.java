@@ -1,10 +1,7 @@
 package dto;
 
-import lombok.Builder;
-
-import java.util.List;
-
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import model.Board;
@@ -13,7 +10,7 @@ import model.Board;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DetailResponseDto {
-	private BoardResponseDto boardDto;
-	private List<ReplyResponseDto> replyDtos;
+public class BoardResponseDto {
+	private Board board;
+	private String username;
 }

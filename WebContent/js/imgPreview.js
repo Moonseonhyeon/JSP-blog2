@@ -13,6 +13,6 @@ $("#img__preview").on("change", function(e) {
 	reader.onload = function(e) {
 		$("#img__wrap").attr("src", e.target.result);
 	};
-
+	// 바구니 채워 놓는 시간이 2초
 	reader.readAsDataURL(f); // 파일 읽기 (비동기 실행)
 });
