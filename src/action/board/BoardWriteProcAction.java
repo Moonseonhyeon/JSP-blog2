@@ -56,9 +56,7 @@ public class BoardWriteProcAction implements Action{
 		// 5번 result == 1이면 성공로직(index.jsp로 이동)
 		// 6번 result != 1이면 실패로직(history.back())
 		if(result == 1) {
-			RequestDispatcher dis = 
-					request.getRequestDispatcher("index.jsp");
-			dis.forward(request, response);
+			Script.href("글쓰기 성공", "index.jsp", response);
 		}else {
 			Script.back("글쓰기에 실패하였습니다.", response);
 		}
