@@ -4,7 +4,7 @@
 <%@ include file="../include/nav.jsp" %> 
 
 <div class="container">
-	<form action="/blog2/user?cmd=updateProc" method="POST" class="was-validated" onsubmit="return validate()">
+	<form action="/blog2/user?cmd=updateProc" method="POST" class="was-validated">
 
 	    <input type="hidden" name="id" value="${sessionScope.principal.id}"/>
 	  <div class="form-group">
@@ -15,7 +15,7 @@
 	  </div>
 
 	  <div class="form-group">
-	    <label for="pwd">Password:</label>
+	    <label for="password">Password:</label>
 	    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
 	    <div class="valid-feedback">Valid.</div>
 	    <div class="invalid-feedback">Please fill out this field.</div>
@@ -41,4 +41,5 @@
 	</form>
 </div>
 
+<script src="${path}/js/juso.js"></script>
 <%@ include file="../include/footer.jsp" %>

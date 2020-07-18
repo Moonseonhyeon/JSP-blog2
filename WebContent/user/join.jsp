@@ -46,4 +46,5 @@
 	</form>
 </div>
 <script src="${path}/js/join.js"></script>
+<script src="${path}/js/jusopop.js"></script>
 <%@ include file="../include/footer.jsp"%>
