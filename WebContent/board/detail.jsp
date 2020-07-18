@@ -19,26 +19,5 @@
 		<div class="container p-3 my-3 border">${dto.board.content}</div>
 	</div>
 </div>
-<script>
-	function deleteById(boardId){
-		$.ajax({
-			type: "POST",
-			url: "/blog2/board?cmd=delete&id="+boardId,
-			dataType: "text"
-		}).done(function(result){
-			console.log(result);
-			if(result == 1){
-				alert("삭제 성공");
-				location.href="/blog2/index.jsp";
-			}else{
-				alert("삭제 실패");
-			}
-		}).fail(function(error){
-			console.log(error);
-			console.log(error.responseText);
-			console.log(error.status);
-			alert("서버 오류");
-		});
-	}
-</script>
+<script src="/blog2/js/detail.js"></script>
 <%@ include file="../include/footer.jsp"%> 

@@ -14,6 +14,8 @@ import action.user.UsersJoinProcAction;
 import action.user.UsersLoginAction;
 import action.user.UsersLoginProcAction;
 import action.user.UsersLogoutAction;
+import action.user.UsersUpdateAction;
+import action.user.UsersUpdateProcAction;
 import action.user.UsersUsernameCheckAction;
 
 //http://localhost:8000/blog/user
@@ -57,8 +59,10 @@ public class UsersController extends HttpServlet {
 			// 회원가입 진행 한후 -> Index.jsp로 이동
 			return new UsersJoinProcAction();
 		} else if (cmd.equals("update")) {
+			return new UsersUpdateAction();
 			// 회원수정 페이지로 이동 (세션에 User 오브젝트를 가지고 있을 예정)
 		} else if (cmd.equals("updateProc")) {
+			return new UsersUpdateProcAction();
 			// 회원수정을 진행한후 -> index.jsp로 이동
 		} else if (cmd.equals("delete")) {
 			// 회원삭제를 진행한 후 -> 로그아웃을 하고 -> index.jsp로 이동

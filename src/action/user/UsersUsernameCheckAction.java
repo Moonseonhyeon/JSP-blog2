@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import repository.UsersRepository;
+import util.Script;
 
 public class UsersUsernameCheckAction implements Action{
 
@@ -21,7 +22,6 @@ public class UsersUsernameCheckAction implements Action{
 				UsersRepository.getInstance();
 		int result = usersRepository.findByUsername(username);
 
-		PrintWriter out = response.getWriter();
-		out.print(result);
+		Script.outText(result+"", response);
 	}
 }
