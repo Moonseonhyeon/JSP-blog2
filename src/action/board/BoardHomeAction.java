@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import model.Board;
 import repository.BoardRepository;
+import util.HtmlParser;
 
 public class BoardHomeAction implements Action{
 
@@ -27,10 +28,7 @@ public class BoardHomeAction implements Action{
 
 		// 본문 짧게 가공하기
 		for (Board board : boards) {
-			String preview = board.getContent();
-			if(preview.length()>10) {
-				preview = preview.substring(0, 10)+"...";
-			}
+			String preview = HtmlParser.getContentPreview(board.getContent());
 			board.setContent(preview);
 		}
 		request.setAttribute("boards", boards);
