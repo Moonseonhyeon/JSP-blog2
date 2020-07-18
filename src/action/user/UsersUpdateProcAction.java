@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import model.Users;
 import repository.UsersRepository;
+import util.SHA256;
 import util.Script;
 
 public class UsersUpdateProcAction implements Action{
@@ -38,7 +39,8 @@ public class UsersUpdateProcAction implements Action{
 		}
 
 		int id = Integer.parseInt(request.getParameter("id"));
-		String password = request.getParameter("password");
+		String rawPassword = request.getParameter("password");
+		String password = SHA256.encodeSha256(rawPassword);
 		String email = request.getParameter("email");
 		String address = request.getParameter("address");
 
