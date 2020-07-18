@@ -5,7 +5,7 @@
 <%@ include file="../include/authentication.jsp"%>
 
 <div class="container">
-	<form action="/blog/board?cmd=updateProc" method="POST">
+	<form action="/blog2/board?cmd=updateProc" method="POST">
 
 		<input type="hidden" value="${dto.board.id}" name="id"/>
 		<div class="form-group">
