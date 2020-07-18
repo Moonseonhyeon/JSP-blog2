@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.user.UsersJoinAction;
@@ -38,6 +39,9 @@ public class UsersController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		session.setAttribute("path", request.getContextPath());
+		
 		// http://localhost:8000/blog2/user?cmd=join
 		String cmd = request.getParameter("cmd");
 		System.out.println(TAG + "router : " + cmd);

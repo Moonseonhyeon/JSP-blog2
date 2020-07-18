@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Board {
 	private int id;
-	private String userid;
+	private int userId;
 	private String title;
 	private String content;
-	private int number;
+	private int readCount;
 	private Timestamp createdate;
 }
