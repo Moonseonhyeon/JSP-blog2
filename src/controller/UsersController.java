@@ -14,6 +14,8 @@ import action.user.UsersJoinProcAction;
 import action.user.UsersLoginAction;
 import action.user.UsersLoginProcAction;
 import action.user.UsersLogoutAction;
+import action.user.UsersProfileUploadAction;
+import action.user.UsersProfileUploadProcAction;
 import action.user.UsersUpdateAction;
 import action.user.UsersUpdateProcAction;
 import action.user.UsersUsernameCheckAction;
@@ -77,6 +79,10 @@ public class UsersController extends HttpServlet {
 			return new UsersLogoutAction();
 		}else if(cmd.equals("usernameCheck")) {
 			return new UsersUsernameCheckAction();
+		}else if(cmd.equals("profileUpload")) {
+			return new UsersProfileUploadAction();
+		}else if(cmd.equals("profileUploadProc")) {
+			return new UsersProfileUploadProcAction();
 		}
 		return null;
 	}
