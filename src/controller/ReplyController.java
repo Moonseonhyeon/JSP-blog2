@@ -18,6 +18,7 @@ import action.board.BoardUpdateAction;
 import action.board.BoardUpdateProcAction;
 import action.board.BoardWriteAction;
 import action.board.BoardWriteProcAction;
+import action.reply.ReplyDeleteProcAction;
 import action.reply.ReplyWriteProcAction;
 
 @WebServlet("/reply")
@@ -55,6 +56,8 @@ public class ReplyController extends HttpServlet {
 	public Action router(String cmd) {
 		if(cmd.equals("writeProc")) {
 			return new ReplyWriteProcAction(); //Board의 목록
+		}else if(cmd.equals("deleteProc")) {
+			return new ReplyDeleteProcAction(); //Board의 목록
 		}
 		return null;
 	}

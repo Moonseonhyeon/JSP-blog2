@@ -6,7 +6,7 @@
 	<%@ include file="../include/goBack.jsp"%>
 
 	<c:if test="${sessionScope.principal.id == detailDto.boardDto.board.userId}">
-		<a href="/blog/board?cmd=update&id=${detailDto.boardDto.board.id}" class="btn btn-warning">수정</a>
+		<a href="/blog2/board?cmd=update&id=${detailDto.boardDto.board.id}" class="btn btn-warning">수정</a>
 		<button class="btn btn-danger" onclick="deleteById(${detailDto.boardDto.board.id})">삭제</button>
 	</c:if>
 
@@ -42,13 +42,18 @@
 						<ul id="reply__list" class="media-list">
 							<c:forEach var="replyDto" items="${detailDto.replyDtos}">
 								<!-- 댓글 아이템 -->
-								<li class="media">	
-									<img onerror="this.src='/blog/image/userProfile.png'" src="${replyDto.userProfile}" alt="" class="img-circle">		
+								<li id="reply-${replyDto.reply.id}" class="media">
+									<img onerror="this.src='/blog2/image/userProfile.png'" src="${replyDto.userProfile}" alt="" class="img-circle">		
 									<div class="media-body">
 										<strong class="text-primary">${replyDto.username}</strong>
 										<p>
 											${replyDto.reply.content}
 										</p>
+									</div>
+									<div class="m-2">
+										<c:if test="${replyDto.reply.userId eq sessionScope.principal.id}">
+											<i onclick="replyDelete(${replyDto.reply.id})" class="material-icons i__btn">delete</i>
+										</c:if>
 									</div>
 								</li>
 							</c:forEach>
