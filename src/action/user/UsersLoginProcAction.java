@@ -14,6 +14,7 @@ import lombok.Builder;
 import model.RoleType;
 import model.Users;
 import repository.UsersRepository;
+import util.SHA256;
 import util.Script;
 
 public class UsersLoginProcAction implements Action {
@@ -31,7 +32,8 @@ public class UsersLoginProcAction implements Action {
 
 		// 파라메터를 받기(x-www-form-urlencoded 라는 MIME타입/ key=value)
 		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String rawPassword = request.getParameter("password");
+		String password = SHA256.encodeSha256(rawPassword);
 
 		// db연결 - UsersRepository의 save() 호출
 		UsersRepository usersRepository = UsersRepository.getInstance();

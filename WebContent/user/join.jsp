@@ -36,7 +36,7 @@
 			<label for="address">Address:</label> <input type="button"
 				class="btn btn-warning float-right" onClick="goPopup();"
 				value="주소 등록하기" /> <input type="text" class="form-control"
-				id="address" placeholder="Enter password" name="address" required
+				id="address" placeholder="Enter Address" name="address" required
 				readonly>
 			<div class="valid-feedback">Valid.</div>
 			<div class="invalid-feedback">Please fill out this field.</div>
