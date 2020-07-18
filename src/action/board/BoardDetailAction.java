@@ -1,4 +1,4 @@
-package BoardDetailAction;
+package action.board;
 
 import java.io.IOException;
 
