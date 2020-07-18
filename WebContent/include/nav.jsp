@@ -26,7 +26,7 @@
 <body>
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="/blog2/board?cmd=home">The blog</a>
+		<a class="navbar-brand" href="/blog2/index.jsp">The blog</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
